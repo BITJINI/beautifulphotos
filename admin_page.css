@@ -1,0 +1,14 @@
+
+table, th, td {
+      border: 1px solid #1976D2 ;
+      border-collapse: collapse;
+      font-size:12px;
+      
+  }
+    
+th, td {
+    padding: 6px 38px 14px 15px;
+    text-align:left;
+}
+
+
