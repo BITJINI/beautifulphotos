@@ -36,6 +36,7 @@ $arr3 = json_decode($output3,true);
     <th>Merchandise Type</th>
     <th>Quantity</th>
     <th>Shipping Address</th>
+    <th>Amount</th>
     <th>Status</th>
    <!--  <th>Link</th> -->
     <th>Download</th>
@@ -55,6 +56,7 @@ for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
     <td><?php echo $arr3[0]['results'][$x]['Merchandise Type']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Quantity']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Shipping Address']; ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
     <td>  <a download="image.jpg" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
