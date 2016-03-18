@@ -103,9 +103,8 @@ for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
     <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
-    <td>  <a download="image.jpg" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
-            <!-- <img alt="Image" src="<?php echo $arr3[0]['results'][$x]['Link']; ?>"> -->
-            <h4>Download</h4>
+    <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
+            Download
           </a>
     </td>
     <td> 
