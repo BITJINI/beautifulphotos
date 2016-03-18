@@ -1,7 +1,21 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="admin_page.css">
-<body>
+<script type="text/javascript">
+
+function hide_wait_msg ()
+{
+    document.getElementById('loadingPleaseWait').style.display = 'none';
+}
+
+function show_wait_msg ()
+{
+     document.getElementById('loadingPleaseWait').style.display = 'block';
+}
+
+</script>
+</head>
+<body onload="hide_wait_msg()">
 
 <?php
 $url3 = 'https://beautifulphotosproject.herokuapp.com/get_details/';
@@ -20,6 +34,35 @@ $output3 = file_get_contents($url3, false,$context3);
 $arr3 = json_decode($output3,true);
 /**/
 ?>
+
+<?php
+
+if($_POST['order_id'] != ''){
+$url4 = 'https://beautifulphotosproject.herokuapp.com/delete_order/';
+$options4 = array(
+  'http' => array(
+    'header'  => array(
+                  'ORDER-ID: '.$_POST['order_id'],
+                ),
+    'method'  => 'GET',
+  ),
+);
+$context4 = stream_context_create($options4);
+$output4 = file_get_contents($url4, false,$context4);
+
+$arr4 = json_decode($output4,true);
+
+if($arr4['status'] == 200){
+  echo "Order deleted";
+}
+
+}
+
+
+?>
+
+
+<div id="loadingPleaseWait"><div><h6>Loading, please wait...</h6></div></div>
 
 <h4>Order Details</h4>
 
@@ -40,6 +83,7 @@ $arr3 = json_decode($output3,true);
     <th>Status</th>
    <!--  <th>Link</th> -->
     <th>Download</th>
+    <th>Action</th>
   </tr>
 
 <?php 
@@ -63,6 +107,17 @@ for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
             <!-- <img alt="Image" src="<?php echo $arr3[0]['results'][$x]['Link']; ?>"> -->
             <h4>Download</h4>
           </a>
+    </td>
+    <td> 
+          <form role="form" action="" method="post">
+          <div class="form-group">
+            <input type="hidden" name="order_id" value="<?php echo $arr3[0]['results'][$x]['Order Id']; ?>" class="form-control" required/><br>
+          </div>
+          
+          <button onclick="show_wait_msg()" type="submit" class="btn btn-md round">Delete</button>
+        </form>
+
+
     </td>
   </tr>
 

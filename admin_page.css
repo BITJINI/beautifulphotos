@@ -1,4 +1,21 @@
+body{
+	margin: 0;
+}
 
+
+#loadingPleaseWait {
+    position: absolute; left: 0; top: 0;
+    width: 100%; height: 10%;
+    /*background-color: white;*/
+    display: none;
+    vertical-align: center;
+    }
+#loadingPleaseWait div {
+    margin-top: 2%;
+    margin-left: -20%;
+    text-align: center;
+    }
+    
 table, th, td {
       border: 1px solid #1976D2 ;
       border-collapse: collapse;
