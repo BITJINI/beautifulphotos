@@ -17,25 +17,10 @@ function show_wait_msg ()
 </head>
 <body onload="hide_wait_msg()">
 
-<?php
-$url3 = 'https://beautifulphotosproject.herokuapp.com/get_details/';
-$options3 = array(
-  'http' => array(
-    /*'header'  => array(
-                  'USERNAME: '.$_POST['username'],
-                  'PASSWORD: '.$_POST['password'],
-                ),*/
-    'method'  => 'GET',
-  ),
-);
-$context3 = stream_context_create($options3);
-$output3 = file_get_contents($url3, false,$context3);
-/*echo $output3;*/
-$arr3 = json_decode($output3,true);
-/**/
-?>
 
 <?php
+
+/*echo $_POST['order_id'];*/
 
 if($_POST['order_id'] != ''){
 $url4 = 'https://beautifulphotosproject.herokuapp.com/delete_order/';
@@ -59,6 +44,25 @@ if($arr4['status'] == 200){
 }
 
 
+?>
+
+
+<?php
+$url3 = 'https://beautifulphotosproject.herokuapp.com/get_details/';
+$options3 = array(
+  'http' => array(
+    /*'header'  => array(
+                  'USERNAME: '.$_POST['username'],
+                  'PASSWORD: '.$_POST['password'],
+                ),*/
+    'method'  => 'GET',
+  ),
+);
+$context3 = stream_context_create($options3);
+$output3 = file_get_contents($url3, false,$context3);
+/*echo $output3;*/
+$arr3 = json_decode($output3,true);
+/**/
 ?>
 
 
