@@ -20,6 +20,34 @@ function show_wait_msg ()
 
 <?php
 
+$url_check = 'https://beautifulphotosproject.herokuapp.com/update_logged_in/check/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
+$options_check = array(
+  'http' => array(
+    /*'header'  => array(
+                  'LOGGED-IN: 1',
+                ),*/
+    'method'  => 'GET',
+  ),
+);
+$context_check = stream_context_create($options_check);
+$output_check = file_get_contents($url_check, false,$context_check);
+/*echo $output_check;*/
+$arr_check = json_decode($output_check,true);
+/*echo $arr_check;*/
+
+if($arr_check['status'] == 400){
+      echo "<script>location='index.php'</script>";
+}else{
+    /*echo "<script>location='index.php'</script>"; */ 
+}
+
+
+?>
+
+
+
+<?php
+
 /*echo $_POST['order_id'];*/
 
 if($_POST['order_id'] != ''){
@@ -65,8 +93,9 @@ $arr3 = json_decode($output3,true);
 /**/
 ?>
 
-
+<a href="logout.php" id="log_out">Log Out</a>
 <div id="loadingPleaseWait"><div><h6>Loading, please wait...</h6></div></div>
+
 
 <h4>Order Details</h4>
 
