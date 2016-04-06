@@ -136,10 +136,22 @@ for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
     <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
-    <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
+    <!-- <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
             Download
           </a>
+    </td> -->
+
+    <td>
+    <?php/* echo $arr3[0]['results'][$x]['Link']; */?>
+    <form method="post" action="download.php">
+    <input type="hidden" name="image_link" value="<?php echo $arr3[0]['results'][$x]['Link']; ?>"></input>
+    <button type="submit">Download</button>
     </td>
+
+    </form>
+   
+
+
     <td> 
           <form role="form" action="" method="post">
           <div class="form-group">
