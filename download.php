@@ -28,12 +28,40 @@ for ($x = 0; $x < count($myArray); $x++) {
 	
 	$arr_download = json_decode($output_download,true);
 	$download_urls[$x]=$arr_download[0]['url'];
+
 } 
 
 
-echo $download_urls[0];
-echo "<br>";
-echo $download_urls[1];
+
+$files = $download_urls;
+
+# create new zip opbject
+$zip = new ZipArchive();
+
+# create a temp file & open it
+$tmp_file = tempnam('.','');
+$zip->open($tmp_file, ZipArchive::CREATE);
+
+# loop through each file
+foreach($files as $file){
+
+    # download file
+    $download_file = file_get_contents($file);
+
+    $parts = explode("?",$file); 
+
+    #add it to the zip
+    $zip->addFromString(basename($parts['0']),$download_file);
+
+}
+
+# close zip
+$zip->close();
+
+# send the file to the browser as a download
+header('Content-disposition: attachment; filename=download.zip');
+header('Content-type: application/zip');
+readfile($tmp_file);
 
 /*header('location: '.$arr_download[0]['url']);
 */?>
