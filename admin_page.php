@@ -46,33 +46,7 @@ if($arr_check['status'] == 400){
 
 
 
-<?php
 
-/*echo $_POST['order_id'];*/
-
-if($_POST['order_id'] != ''){
-$url4 = 'https://beautifulphotosproject.herokuapp.com/delete_order/';
-$options4 = array(
-  'http' => array(
-    'header'  => array(
-                  'ORDER-ID: '.$_POST['order_id'],
-                ),
-    'method'  => 'GET',
-  ),
-);
-$context4 = stream_context_create($options4);
-$output4 = file_get_contents($url4, false,$context4);
-
-$arr4 = json_decode($output4,true);
-
-if($arr4['status'] == 200){
-  echo "Order deleted";
-}
-
-}
-
-
-?>
 
 
 <?php
@@ -154,11 +128,11 @@ for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
 
 
     <td> 
-          <form role="form" action="" method="post">
+          <form role="form" action="delete.php" method="post">
           <div class="form-group">
-            <input type="hidden" name="order_id" value="<?php echo $arr3[0]['results'][$x]['Order Id']; ?>" class="form-control" required/><br>
+            <input type="hidden" name="order_id_delete" value="<?php echo $arr3[0]['results'][$x]['Order Id']; ?>" class="form-control" required/><br>
           </div>
-          
+          <input type="hidden" name="image_link_delete" value="<?php echo $arr3[0]['results'][$x]['Link']; ?>"></input>
           <button onclick="show_wait_msg()" type="submit" class="btn btn-md round">Delete</button>
         </form>
 
