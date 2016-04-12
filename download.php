@@ -59,7 +59,7 @@ foreach($files as $file){
 $zip->close();
 
 # send the file to the browser as a download
-header('Content-disposition: attachment; filename=download.zip');
+header('Content-disposition: attachment; filename=Order-Id '.$_POST['order_name'].'.zip');
 header('Content-type: application/zip');
 readfile($tmp_file);
 
