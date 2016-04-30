@@ -1,6 +1,6 @@
 <?php
 
-$url_logged = 'https://beautifulphotosproject.herokuapp.com/update_logged_in/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
+$url_logged = 'https://testing-beautifulphotosproject.herokuapp.com/update_logged_in/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
 $options_logged = array(
   'http' => array(
     'header'  => array(

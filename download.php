@@ -13,7 +13,7 @@ $myArray = explode(',', $myString);
 $download_urls= array();
 
 for ($x = 0; $x < count($myArray); $x++) {
-    $url_download = 'https://beautifulphotosproject.herokuapp.com/download/';
+    $url_download = 'https://testing-beautifulphotosproject.herokuapp.com/download/';
 	$options_download = array(
   		'http' => array(
     		'header'  => array(

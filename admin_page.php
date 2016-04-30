@@ -20,7 +20,7 @@ function show_wait_msg ()
 
 <?php
 
-$url_check = 'https://beautifulphotosproject.herokuapp.com/update_logged_in/check/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
+$url_check = 'https://testing-beautifulphotosproject.herokuapp.com/update_logged_in/check/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
 $options_check = array(
   'http' => array(
     /*'header'  => array(
@@ -50,7 +50,7 @@ if($arr_check['status'] == 400){
 
 
 <?php
-$url3 = 'https://beautifulphotosproject.herokuapp.com/get_details/';
+$url3 = 'https://testing-beautifulphotosproject.herokuapp.com/get_details/';
 $options3 = array(
   'http' => array(
     /*'header'  => array(

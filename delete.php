@@ -2,7 +2,7 @@
 
 <?php
 
-$url4 = 'https://beautifulphotosproject.herokuapp.com/delete_order/';
+$url4 = 'https://testing-beautifulphotosproject.herokuapp.com/delete_order/';
 $options4 = array(
   'http' => array(
     'header'  => array(
@@ -28,7 +28,7 @@ $myArray = explode(',', $myString);
 
 
 for ($x = 0; $x < count($myArray); $x++) {
-    $url_delete = 'https://beautifulphotosproject.herokuapp.com/delete_images/';
+    $url_delete = 'https://testing-beautifulphotosproject.herokuapp.com/delete_images/';
 	$options_delete = array(
   		'http' => array(
     		'header'  => array(
