@@ -24,7 +24,7 @@ function show_wait_msg ()
 
 
 <?php
-if($_POST['username'] != '' && $_POST['password'] != ''){
+/*if($_POST['username'] != '' && $_POST['password'] != ''){
 $url2 = 'https://testing-beautifulphotosproject.herokuapp.com/is_admin_login/';
 $options2 = array(
   'http' => array(
@@ -37,11 +37,8 @@ $options2 = array(
 );
 $context2 = stream_context_create($options2);
 $output2 = file_get_contents($url2, false,$context2);
-/*echo $output2;*/
 $arr2 = json_decode($output2,true);
 if($arr2['status']==200){
-  /*echo "Admin Logged In";*/
-  /*header('Location: admin_page.php');*/
 
                           $url_logged = 'https://testing-beautifulphotosproject.herokuapp.com/update_logged_in/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
                           $options_logged = array(
@@ -54,14 +51,21 @@ if($arr2['status']==200){
                           );
                           $context_logged = stream_context_create($options_logged);
                           $output_logged = file_get_contents($url_logged, false,$context_logged);
-                          /*echo $output2;*/
                           $arr_logged = json_decode($output_logged,true);
   echo "<script>location='admin_page.php'</script>";
 }else{
-  /*echo "Invalid admin credentials";*/
 }
 
-}?>
+}*/
+
+if($_POST['username'] != '' && $_POST['password'] != ''){
+  if($_POST['username'] == 'test' && $_POST['password'] == 'bitjini'){
+      echo "<script>location='admin_page.php'</script>";
+  }
+
+}
+
+?>
 
 
 
@@ -71,9 +75,9 @@ if($arr2['status']==200){
 <div id="loadingPleaseWait"><div><h6>Loading, please wait...</h6></div></div>
 
 
-<?php if($arr2['status']==400 || $arr['status'] == 401){
+<?php /*if($arr2['status']==400 || $arr['status'] == 401){
           $error="Invalid Admin Credentials";
-}?>
+}*/?>
 
 
 
