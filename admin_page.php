@@ -84,10 +84,12 @@ $arr3 = json_decode($output3,true);
     <th>Phone</th>
     <th>Address</th>
     <th>Merchandise Type</th>
-    <th>Quantity</th>
+    <th>Copy</th>
     <th>Shipping Address</th>
     <th>Dimension</th>
     <th>Amount</th>
+    <th>Count</th>
+    <th>Photos Uploaded</th>
     <th>Status</th>
    <!--  <th>Link</th> -->
     <th>Download</th>
@@ -95,7 +97,21 @@ $arr3 = json_decode($output3,true);
   </tr>
 
 <?php 
-for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
+for ($x = 0; $x < count($arr3[0]['results']); $x++) { 
+
+$q= str_replace('{','',$arr3[0]['results'][$x]['Link']);
+$r= str_replace('}','',$q);
+$myString1=$r;
+$myArray1 = explode(',', $myString1);
+$photos_uploaded=count($myArray1);
+
+if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
+  $status="Upload Complete";
+}else{
+  $status="Upload Pending";
+}
+
+?>
 
   <tr>
     <td><?php echo $arr3[0]['results'][$x]['Order Id']; ?></td>
@@ -106,11 +122,13 @@ for ($x = 0; $x < count($arr3[0]['results']); $x++) { ?>
     <td><?php echo $arr3[0]['results'][$x]['Phone']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Address']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Merchandise Type']; ?></td>
-    <td><?php echo $arr3[0]['results'][$x]['Quantity']; ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['Copy']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Shipping Address']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Dimension']; ?></td> 
     <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
-    <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['Count']; ?></td>
+    <td><?php echo $photos_uploaded ?></td>
+    <td><?php echo $status ?></td>
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
     <!-- <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
             Download
