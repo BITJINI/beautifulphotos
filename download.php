@@ -31,7 +31,7 @@ for ($x = 0; $x < count($myArray); $x++) {
 
 } 
 
-$url_send_email = 'https://beautifulphotosproject.herokuapp.com/send_email/';
+$url_send_email = 'https://beautifulphotosproject.herokuapp.com/send_mail/';
 $options_send_email = array(
     'http' => array(
       'header'  => array(
