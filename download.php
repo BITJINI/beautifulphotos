@@ -29,7 +29,22 @@ for ($x = 0; $x < count($myArray); $x++) {
 	$arr_download = json_decode($output_download,true);
 	$download_urls[$x]=$arr_download[0]['url'];
 
-} 
+}
+
+$url_send_email = 'https://test2-beautifulphotosproject.herokuapp.com/send_mail/';
+$options_send_email = array(
+    'http' => array(
+      'header'  => array(
+                'EMAIL: '.$_POST['order_email'],
+              ),
+      'method'  => 'GET',
+    ),
+);
+$context_send_email = stream_context_create($options_send_email);
+$output_send_email = file_get_contents($url_send_email, false,$context_send_email);
+/*echo $output_download;*/
+
+$arr_send_email = json_decode($output_send_email,true); 
 
 
 
