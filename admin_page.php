@@ -138,6 +138,7 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
     <td>
     <?php/* echo $arr3[0]['results'][$x]['Link']; */?>
     <form method="post" action="download.php">
+    <input type="hidden" name="order_email" value="<?php echo $arr3[0]['results'][$x]['Email']; ?>"></input>
     <input type="hidden" name="order_name" value="<?php echo $arr3[0]['results'][$x]['Order Id']; ?>"></input>
     <input type="hidden" name="image_link" value="<?php echo $arr3[0]['results'][$x]['Link']; ?>"></input>
     <button type="submit">Download</button>
