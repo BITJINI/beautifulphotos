@@ -73,7 +73,9 @@ $arr3 = json_decode($output3,true);
 
 <h4>Order Details</h4>
 
-<button style="background-color:#E0E0E0 ;width:200px;height:40px" onclick="location.href = 'send_push_message.php';">Send Push Notification</button>
+<div style="text-align:right;margin-top:-3%;margin-right:2%">
+<button style="background-color:#E0E0E0 ;width:200px;height:40px" onclick="location.href = 'send_push_message.php';">Notification</button>
+</div>
 <br><br>
 <table>
   <tr>
