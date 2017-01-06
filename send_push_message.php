@@ -32,7 +32,7 @@
 </head>
 <body>
 <?php
-  $url_get_list_of_devices = 'https://test2-beautifulphotosproject.herokuapp.com/register_device/list/';
+  $url_get_list_of_devices = 'https://beautifulphotosproject.herokuapp.com/register_device/list/';
   $options_get_list_of_devices = array(
     'http' => array(
       /*'header'  => array(
@@ -65,7 +65,7 @@ else if(isset($_POST['submit_btn'])){
  	$msg=$msg=$_POST['template'];
  }
  
- 		  $url_send_message = 'https://test2-beautifulphotosproject.herokuapp.com/send_push_message/';
+ 		  $url_send_message = 'https://beautifulphotosproject.herokuapp.com/send_push_message/';
 		  $options_send_message = array(
 		    'http' => array(
 		      'header'  => array(
