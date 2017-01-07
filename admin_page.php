@@ -119,9 +119,9 @@ $arr3 = json_decode($output3,true);
     <th>Count</th>
     <th>Photos Uploaded</th>
     <th>Upload Status</th>
-    <th>Status</th>
-   <!--  <th>Link</th> -->
     <th>Order Status</th>
+   <!--  <th>Link</th> -->
+    <th>Select Status</th>
     <th>Download</th>
     <th>Action</th>
   </tr>
