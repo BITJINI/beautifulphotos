@@ -45,9 +45,28 @@ if($arr_check['status'] == 400){
 ?>
 
 
-
-
-
+<?php
+if(isset($_POST['status_submit'])){
+$url_mail_status = 'https://beautifulphotosproject.herokuapp.com/send_mail/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
+$options_mail_status = array(
+  'http' => array(
+    'header'  => array(
+                  'ORDER-ID: '.$_POST['status_order_id'],
+                  'EMAIL: '.$_POST['status_email'],
+                  'STATUS: '.$_POST['order_status'],
+                ),
+    'method'  => 'GET',
+  ),
+);
+$context_mail_status = stream_context_create($options_mail_status);
+$output_mail_status = file_get_contents($url_mail_status, false,$context_mail_status);
+$arr_mail_status = json_decode($output_mail_status,true);
+/*echo $arr_mail_status[0]['status'];*/
+/*if($arr_mail_status[0]['status']==200){
+  echo "<script>alert('Status set and Mail sent to the user')</script>";
+}*/
+}
+?>
 
 <?php
 $url3 = 'https://beautifulphotosproject.herokuapp.com/get_details/';
@@ -94,8 +113,10 @@ $arr3 = json_decode($output3,true);
     <th>Amount</th>
     <th>Count</th>
     <th>Photos Uploaded</th>
-    <th>Status</th>
+    <th>Upload Status</th>
+    <th>Order Status</th>
    <!--  <th>Link</th> -->
+    <th>Select Status</th>
     <th>Download</th>
     <th>Action</th>
   </tr>
@@ -110,9 +131,9 @@ $myArray1 = explode(',', $myString1);
 $photos_uploaded=count($myArray1);
 
 if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
-  $status="Upload Complete";
+  $upload_status="Upload Complete";
 }else{
-  $status="Upload Pending";
+  $upload_status="Upload Pending";
 }
 
 ?>
@@ -132,12 +153,32 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
     <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Count']; ?></td>
     <td><?php echo $photos_uploaded ?></td>
-    <td><?php echo $status ?></td>
+    <td><?php echo $upload_status ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
     <!-- <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
             Download
           </a>
     </td> -->
+
+    <td>
+    <form method="post" action="admin_page.php">
+        <input type="hidden" name="status_order_id" value="<?php echo $arr3[0]['results'][$x]['Order Id']; ?>"></input>
+        <input type="hidden" name="status_email" value="<?php echo $arr3[0]['results'][$x]['Email']; ?>"></input>
+        <select name="order_status" method="post">
+          <option value="Received" selected>Received</option>
+          <option value="In Process">In Process</option>
+          <option value="Prepared">Prepared</option>
+          <option value="Dispatched">Dispatched</option>
+          <option value="Cancelled">Cancelled</option>
+          <option value="Delivered">Delivered</option>
+          <option value="Closed">Closed</option>
+        </select>
+      
+        <button name="status_submit" value="status_submit" style="margin-top:6% !important" type="submit">Select</button>
+      
+    </form>
+    </td>
 
     <td>
     <?php/* echo $arr3[0]['results'][$x]['Link']; */?>
