@@ -173,7 +173,7 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
         <select name="order_status" method="post">
           <option value="Received" selected>Received</option>
           <option value="In Process">In Process</option>
-          <option value="Completed">Completed</option>
+          <option value="Prepared">Prepared</option>
           <option value="Dispatched">Dispatched</option>
           <option value="Cancelled">Cancelled</option>
           <option value="Delivered">Delivered</option>
