@@ -62,9 +62,9 @@ $context_mail_status = stream_context_create($options_mail_status);
 $output_mail_status = file_get_contents($url_mail_status, false,$context_mail_status);
 $arr_mail_status = json_decode($output_mail_status,true);
 /*echo $arr_mail_status[0]['status'];*/
-if($arr_mail_status[0]['status']==200){
+/*if($arr_mail_status[0]['status']==200){
   echo "<script>alert('Status set and Mail sent to the user')</script>";
-}
+}*/
 }
 ?>
 
@@ -118,6 +118,7 @@ $arr3 = json_decode($output3,true);
     <th>Amount</th>
     <th>Count</th>
     <th>Photos Uploaded</th>
+    <th>Upload Status</th>
     <th>Status</th>
    <!--  <th>Link</th> -->
     <th>Order Status</th>
@@ -135,9 +136,9 @@ $myArray1 = explode(',', $myString1);
 $photos_uploaded=count($myArray1);
 
 if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
-  $status="Upload Complete";
+  $upload_status="Upload Complete";
 }else{
-  $status="Upload Pending";
+  $upload_status="Upload Pending";
 }
 
 ?>
@@ -157,7 +158,8 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
     <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Count']; ?></td>
     <td><?php echo $photos_uploaded ?></td>
-    <td><?php echo $status ?></td>
+    <td><?php echo $upload_status ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
     <!-- <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
             Download
