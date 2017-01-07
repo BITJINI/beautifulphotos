@@ -46,6 +46,24 @@ if($arr_check['status'] == 400){
 ?>
 
 <?php
+$url3 = 'https://test2-beautifulphotosproject.herokuapp.com/get_details/';
+$options3 = array(
+  'http' => array(
+    /*'header'  => array(
+                  'USERNAME: '.$_POST['username'],
+                  'PASSWORD: '.$_POST['password'],
+                ),*/
+    'method'  => 'GET',
+  ),
+);
+$context3 = stream_context_create($options3);
+$output3 = file_get_contents($url3, false,$context3);
+/*echo $output3;*/
+$arr3 = json_decode($output3,true);
+/**/
+?>
+
+<?php
 if(isset($_POST['status_submit'])){
 $url_mail_status = 'https://test2-beautifulphotosproject.herokuapp.com/send_mail/?access_token=QIw10aWGHb2kchy1huq5o3CyJ88kR9';
 $options_mail_status = array(
@@ -66,29 +84,6 @@ $arr_mail_status = json_decode($output_mail_status,true);
   echo "<script>alert('Status set and Mail sent to the user')</script>";
 }*/
 }
-?>
-
-
-
-
-
-
-<?php
-$url3 = 'https://test2-beautifulphotosproject.herokuapp.com/get_details/';
-$options3 = array(
-  'http' => array(
-    /*'header'  => array(
-                  'USERNAME: '.$_POST['username'],
-                  'PASSWORD: '.$_POST['password'],
-                ),*/
-    'method'  => 'GET',
-  ),
-);
-$context3 = stream_context_create($options3);
-$output3 = file_get_contents($url3, false,$context3);
-/*echo $output3;*/
-$arr3 = json_decode($output3,true);
-/**/
 ?>
 
 <a href="logout.php" id="log_out">Log Out</a>
