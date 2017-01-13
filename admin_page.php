@@ -54,6 +54,7 @@ $options_mail_status = array(
                   'ORDER-ID: '.$_POST['status_order_id'],
                   'EMAIL: '.$_POST['status_email'],
                   'STATUS: '.$_POST['order_status'],
+                  'PHONE: '.$_POST['status_phone'],
                 ),
     'method'  => 'GET',
   ),
@@ -165,6 +166,7 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
     <form method="post" action="admin_page.php">
         <input type="hidden" name="status_order_id" value="<?php echo $arr3[0]['results'][$x]['Order Id']; ?>"></input>
         <input type="hidden" name="status_email" value="<?php echo $arr3[0]['results'][$x]['Email']; ?>"></input>
+        <input type="hidden" name="status_phone" value="<?php echo $arr3[0]['results'][$x]['Phone']; ?>"></input>
         <select name="order_status" method="post">
           <option value="Received" selected>Received</option>
           <option value="In Process">In Process</option>
