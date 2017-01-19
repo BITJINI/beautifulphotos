@@ -98,10 +98,10 @@ else if(isset($_POST['submit_btn'])){
   Select a Template<br>
   <select name="template">
     <option value="" selected></option>
-    <option value="Thank you for using Beautiful Photos!">Thank you for using Beautiful Photos!</option>
-    <option value="New Year Offers coming soon. Please have a look at our website!">New Year Offers coming soon. Please have a look at our website!</option>
-    <option value="Have a Nice Day!">Have a Nice Day!</option>
-    <option value="Good Morning!">Good Morning!</option>
+    <option value="Hello from Beautifulphotos.">Hello from Beautifulphotos.</option>
+    <option value="Have a good day. Regards from Beautifulphotos.">Have a good day. Regards from Beautifulphotos.</option>
+    <option value="Have you designed your Mug yet?">Have you designed your Mug yet?</option>
+    <option value="Good morning and have a great day from Beautifulphotos.">Good morning and have a great day from Beautifulphotos.</option>
   </select>
 
   <br><br><br><br>
