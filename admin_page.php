@@ -112,6 +112,8 @@ $arr3 = json_decode($output3,true);
     <th>Shipping Address</th>
     <th>Dimension</th>
     <th>Amount</th>
+    <th>COD</th>
+    <th>Platform</th>
     <th>Count</th>
     <th>Photos Uploaded</th>
     <th>Upload Status</th>
@@ -152,6 +154,8 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
     <td><?php echo $arr3[0]['results'][$x]['Shipping Address']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Dimension']; ?></td> 
     <td><?php echo $arr3[0]['results'][$x]['Amount']; ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['COD']; ?></td>
+    <td><?php echo $arr3[0]['results'][$x]['Platform']; ?></td>
     <td><?php echo $arr3[0]['results'][$x]['Count']; ?></td>
     <td><?php echo $photos_uploaded ?></td>
     <td><?php echo $upload_status ?></td>
