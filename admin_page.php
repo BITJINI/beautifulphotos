@@ -119,7 +119,7 @@ $arr3 = json_decode($output3,true);
     <th>Upload Status</th>
     <th>Order Status</th>
    <!--  <th>Link</th> -->
-    <th>Select Status</th>
+    <!-- <th>Select Status</th> -->
     <th>Download</th>
     <th>Action</th>
   </tr>
@@ -159,7 +159,7 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
     <td><?php echo $arr3[0]['results'][$x]['Count']; ?></td>
     <td><?php echo $photos_uploaded ?></td>
     <td><?php echo $upload_status ?></td>
-    <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td>
+    <!-- <td><?php echo $arr3[0]['results'][$x]['Status']; ?></td> -->
    <!--  <td><?php echo $arr3[0]['results'][$x]['Link']; ?></td> -->
     <!-- <td>  <a download="<?php echo $arr3[0]['results'][$x]['Order No']; ?>" href="<?php echo $arr3[0]['results'][$x]['Link']; ?>" title="Image">
             Download
@@ -172,7 +172,8 @@ if($photos_uploaded >= $arr3[0]['results'][$x]['Count']){
         <input type="hidden" name="status_email" value="<?php echo $arr3[0]['results'][$x]['Email']; ?>"></input>
         <input type="hidden" name="status_phone" value="<?php echo $arr3[0]['results'][$x]['Phone']; ?>"></input>
         <select name="order_status" method="post">
-          <option value="Received" selected>Received</option>
+          <option value=<?php echo $arr3[0]['results'][$x]['Status']; ?> selected><?php echo $arr3[0]['results'][$x]['Status']; ?></option>
+          <option value="Received">Received</option>
           <option value="In Process">In Process</option>
           <option value="Prepared">Prepared</option>
           <option value="Dispatched">Dispatched</option>
