@@ -51,7 +51,82 @@
 
 <?php
 
-if($_POST['message'] == '' && $_POST['template'] == '' && isset($_POST['submit_btn'])){
+if(isset($_POST['submit_btn']) and isset($_POST['fileToUpload']) ){
+  /*echo $_FILES["fileToUpload"]["name"];*/
+
+  /*Upload Files*/
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < 4; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $names=array();
+            $names[0]= $randomString.rand(0, 9999).".jpg";
+
+
+            /*Get Signed Urls*/
+            $url = 'https://beautifulphotosproject.herokuapp.com/get_signed_url/';
+            $data = array('image_list' => [$names[0]]);
+
+            $options = array(
+              'http' => array(
+                'header'  => "Content-type: application/json\r\n",
+                'method'  => 'PUT',
+                'content' => json_encode($data),
+              ),
+            );
+            $context  = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+            $arr = json_decode($result,true);
+
+            /*echo $arr[0]['id'];*/
+
+            $type=["fileToUpload"];
+
+            /*Upload Images in signed urls*/
+            for($i=0;$i<count($arr);$i++){
+
+                /*echo $arr[$i]['url'];*/
+                $url_upload = $arr[$i]['url'];
+                $filename = $_FILES[$type[$i]]["tmp_name"];
+                $file = fopen($filename, "rb");
+                $data = fread($file, filesize($filename));
+
+                $options_upload = array(
+                  'http' => array(
+                    'header'  => "Content-type: \r\n",
+                    'method'  => 'PUT',
+                    'content' => $data,
+                  ),
+                );
+                $context_upload  = stream_context_create($options_upload);
+                $result_upload = file_get_contents($url_upload, false, $context_upload);
+                $arr_upload = json_decode($result_upload,true);
+
+            
+                $url_update_doc_tab = 'https://beautifulphotosproject.herokuapp.com/upload_notification_image/';
+                $data_update_doc_tab = array('image_id' => $arr[0]['id']);
+
+                $options_update_doc_tab = array(
+                  'http' => array(
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method'  => 'POST',
+                    'content' => http_build_query($data_update_doc_tab),
+                  ),
+                );
+                $context_update_doc_tab  = stream_context_create($options_update_doc_tab);
+                $result_update_doc_tab = file_get_contents($url_update_doc_tab, false, $context_update_doc_tab);
+                $arr_update_doc_tab = json_decode($result_update_doc_tab,true);
+
+
+
+            }
+
+
+}
+else if($_POST['message'] == '' && $_POST['template'] == '' && isset($_POST['submit_btn'])){
 	$error="Message or template is required";
 }
 else if($_POST['message'] != '' && $_POST['template'] != '' && isset($_POST['submit_btn'])){
@@ -91,9 +166,14 @@ else if(isset($_POST['submit_btn'])){
 <h4 style="font-size:30px">Notification</h4>
 <h5 style="color:red;font-size:19px"><?php echo $error ?></h5>
 <form action="send_push_message.php" method="post">
+
+<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+
   Message<br>
   <textarea type="text" name="message" rows="10" cols="50" value="message"></textarea>
-  
+
+
+
   <br><br>
   Select a Template<br>
   <select name="template">
