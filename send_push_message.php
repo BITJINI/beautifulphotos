@@ -51,7 +51,7 @@
 
 <?php
 
-if(isset($_POST['submit_btn']) and isset($_POST['fileToUpload']) ){
+if(isset($_POST['submit_btn_2']) and !empty($_FILES['fileToUpload']['name']) ){
   /*echo $_FILES["fileToUpload"]["name"];*/
 
   /*Upload Files*/
@@ -62,13 +62,12 @@ if(isset($_POST['submit_btn']) and isset($_POST['fileToUpload']) ){
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
             }
 
-            $names=array();
-            $names[0]= $randomString.rand(0, 9999).".jpg";
+            $names= $randomString.rand(0, 9999).".jpg";
 
 
             /*Get Signed Urls*/
-            $url = 'https://beautifulphotosproject.herokuapp.com/get_signed_url/';
-            $data = array('image_list' => [$names[0]]);
+            $url = 'https://beautifulphotosproject.herokuapp.com/get_signed_url_notification/';
+            $data = array('image_list' => [$names]);
 
             $options = array(
               'http' => array(
@@ -81,52 +80,50 @@ if(isset($_POST['submit_btn']) and isset($_POST['fileToUpload']) ){
             $result = file_get_contents($url, false, $context);
             $arr = json_decode($result,true);
 
-            /*echo $arr[0]['id'];*/
+            /*echo $arr[0]["0"];*/
 
-            $type=["fileToUpload"];
+            /*var_dump(filesize($_FILES["fileToUpload"]["tmp_name"]));*/
 
             /*Upload Images in signed urls*/
-            for($i=0;$i<count($arr);$i++){
+            $url_upload = $arr[0]["0"];
+            $filename = $_FILES["fileToUpload"]["tmp_name"];
+            $file = fopen($filename, "rb");
+            $data = fread($file, filesize($filename));
 
-                /*echo $arr[$i]['url'];*/
-                $url_upload = $arr[$i]['url'];
-                $filename = $_FILES[$type[$i]]["tmp_name"];
-                $file = fopen($filename, "rb");
-                $data = fread($file, filesize($filename));
+            /*var_dump($data);*/
 
-                $options_upload = array(
-                  'http' => array(
-                    'header'  => "Content-type: \r\n",
-                    'method'  => 'PUT',
-                    'content' => $data,
-                  ),
-                );
-                $context_upload  = stream_context_create($options_upload);
-                $result_upload = file_get_contents($url_upload, false, $context_upload);
-                $arr_upload = json_decode($result_upload,true);
+            $options_upload = array(
+              'http' => array(
+                'header'  => "Content-type: \r\n",
+                'method'  => 'PUT',
+                'content' => $data,
+              ),
+            );
+            $context_upload  = stream_context_create($options_upload);
+            $result_upload = file_get_contents($url_upload, false, $context_upload);
 
-            
-                $url_update_doc_tab = 'https://beautifulphotosproject.herokuapp.com/upload_notification_image/';
-                $data_update_doc_tab = array('image_id' => $arr[0]['id']);
+            /*var_dump($result_upload);*/
+            $arr_upload = json_decode($result_upload,true);
 
-                $options_update_doc_tab = array(
-                  'http' => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
-                    'content' => http_build_query($data_update_doc_tab),
-                  ),
-                );
-                $context_update_doc_tab  = stream_context_create($options_update_doc_tab);
-                $result_update_doc_tab = file_get_contents($url_update_doc_tab, false, $context_update_doc_tab);
-                $arr_update_doc_tab = json_decode($result_update_doc_tab,true);
+        
+            $url_update_doc_tab = 'https://beautifulphotosproject.herokuapp.com/upload_notification_image/';
+            $data_update_doc_tab = array('image_id' => $arr[0]['id']);
 
-
-
-            }
+            $options_update_doc_tab = array(
+              'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data_update_doc_tab),
+              ),
+            );
+            $context_update_doc_tab  = stream_context_create($options_update_doc_tab);
+            $result_update_doc_tab = file_get_contents($url_update_doc_tab, false, $context_update_doc_tab);
+            $arr_update_doc_tab = json_decode($result_update_doc_tab,true);
 
 
 }
-else if($_POST['message'] == '' && $_POST['template'] == '' && isset($_POST['submit_btn'])){
+
+if($_POST['message'] == '' && $_POST['template'] == '' && isset($_POST['submit_btn'])){
 	$error="Message or template is required";
 }
 else if($_POST['message'] != '' && $_POST['template'] != '' && isset($_POST['submit_btn'])){
@@ -162,12 +159,18 @@ else if(isset($_POST['submit_btn'])){
 ?>
 
 <a href="admin_page.php">Back</a>
+<br><br>
+
+<form action="send_push_message.php" enctype="multipart/form-data" method="post">
+<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+<button name="submit_btn_2" value="submit_btn_2" style="background-color:#E0E0E0;width:200px;height:40px" type="submit">Upload</button>
+</form>
+
 
 <h4 style="font-size:30px">Notification</h4>
 <h5 style="color:red;font-size:19px"><?php echo $error ?></h5>
-<form action="send_push_message.php" method="post">
 
-<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+<form action="send_push_message.php" method="post">
 
   Message<br>
   <textarea type="text" name="message" rows="10" cols="50" value="message"></textarea>
