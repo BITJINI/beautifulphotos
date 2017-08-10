@@ -161,6 +161,7 @@ else if(isset($_POST['submit_btn'])){
 <a href="admin_page.php">Back</a>
 <br><br>
 
+<h4 style="font-size:30px">Notification Image</h4>
 <form action="send_push_message.php" enctype="multipart/form-data" method="post">
 <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 <button name="submit_btn_2" value="submit_btn_2" style="background-color:#E0E0E0;width:200px;height:40px" type="submit">Upload</button>
