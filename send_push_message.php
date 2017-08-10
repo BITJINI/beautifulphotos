@@ -66,7 +66,7 @@ if(isset($_POST['submit_btn_2']) and !empty($_FILES['fileToUpload']['name']) ){
 
 
             /*Get Signed Urls*/
-            $url = 'https://beautifulphotosproject.herokuapp.com/get_signed_url_notification/';
+            $url = 'https://beautifulphotosproject.herokuapp.com/get_signed_url/';
             $data = array('image_list' => [$names]);
 
             $options = array(
@@ -101,8 +101,8 @@ if(isset($_POST['submit_btn_2']) and !empty($_FILES['fileToUpload']['name']) ){
             );
             $context_upload  = stream_context_create($options_upload);
             $result_upload = file_get_contents($url_upload, false, $context_upload);
-
-            /*var_dump($result_upload);*/
+/*
+            var_dump($result_upload);*/
             $arr_upload = json_decode($result_upload,true);
 
         
