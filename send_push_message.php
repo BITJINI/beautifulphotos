@@ -80,7 +80,7 @@ if(isset($_POST['submit_btn_2']) and !empty($_FILES['fileToUpload']['name']) ){
             $result = file_get_contents($url, false, $context);
             $arr = json_decode($result,true);
 
-            echo $arr[0]["0"];
+            /*echo $arr[0]["0"];*/
 
             /*var_dump(filesize($_FILES["fileToUpload"]["tmp_name"]));*/
 
