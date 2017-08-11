@@ -50,6 +50,25 @@
 
 
 <?php
+$url_not = 'https://beautifulphotosproject.herokuapp.com/get_curent_not_img/';
+$options_not = array(
+  'http' => array(
+    /*'header'  => array(
+                  'LOGGED-IN: 1',
+                ),*/
+    'method'  => 'GET',
+  ),
+);
+$context_not = stream_context_create($options_not);
+$output_not = file_get_contents($url_not, false,$context_not);
+/*echo $output_not;*/
+$arr_not = json_decode($output_not,true);
+/*echo $arr_not[0]['url'];*/
+
+
+
+?>
+<?php
 
 if(isset($_POST['submit_btn_2']) and !empty($_FILES['fileToUpload']['name']) ){
   /*echo $_FILES["fileToUpload"]["name"];*/
@@ -159,10 +178,10 @@ else if(isset($_POST['submit_btn'])){
 ?>
 
 <a href="admin_page.php">Back</a>
-<br><br>
 
 <h4 style="font-size:30px">Notification Image</h4>
 <form action="send_push_message.php" enctype="multipart/form-data" method="post">
+<img style="width:<?php echo $arr_not[0]['w'];echo 'px'; ?>;height:<?php echo $arr_not[0]['h'];echo 'px'; ?>" src="<?php echo $arr_not[0]['url'] ?>"></img><br><br>
 <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 <button name="submit_btn_2" value="submit_btn_2" style="background-color:#E0E0E0;width:200px;height:40px" type="submit">Upload</button>
 </form>
